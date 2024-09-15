@@ -13,12 +13,14 @@
     function addCopyButton() {
         document.querySelectorAll('ul li a[target="_blank"]').forEach((e => {
             const t = e.parentNode;
-            if (!t.querySelector(".copy")) {
+            if (!t.querySelector(".copy_custom")) {
                 const o = document.createElement("button");
-                o.className = "copy", o.innerText = "Copy URL", o.addEventListener("click", (() => {
+                o.className = "copy_custom", o.innerText = "Copy URL", o.addEventListener("click", (() => {
                     const t = e.href;
                     navigator.clipboard.writeText(t).then((() => {
-                        alert("Link copied to clipboard!")
+                        o.innerText = "Copied !", setTimeout((() => {
+                            o.innerText = "Copy URL"
+                        }), 1e3)
                     }))["catch"]((e => {
                         console.error("Failed to copy text: ", e)
                     }))
